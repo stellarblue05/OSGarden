@@ -22,4 +22,4 @@ try:
     for digit in sorted(counts.keys()):
         print(f"{digit} = {counts[digit]}")
 except FileNotFoundError:
-    print("Noob lmao")
+    print("Noob lmao") 

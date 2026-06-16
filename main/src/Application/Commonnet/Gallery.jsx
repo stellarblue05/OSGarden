@@ -6,9 +6,7 @@ export default function Gallery({ media }) {
 
   return (
     <div
-      className={`grid gap-1 overflow-hidden ${
-        media.length === 1 ? "grid-cols-1" : "grid-cols-2"
-      }`} center
+      className={`grid gap-1 overflow-hidden ${media.length === 1 ? "grid-cols-1" : "grid-cols-2"}`} 
     >
       {media.length <= 4 ? (
         media.map((src, i) => (

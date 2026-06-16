@@ -1,0 +1,31 @@
+ID Rules:
+    In first digit
+- 1xx = Admin (always verified)
+- 2xx = Company (often verified)
+- 3xx = Influencer (often verified)
+- 4xx = Meme
+- 5xx = Adult-themed (non-explicit)
+- 6xx = Kid
+- 7xx = Professional/Formal 
+- 8xx = Government (often verified)
+- 9xx = Average user
+- 0xx = Bot
+
+    In 2nd digit
+- x0x = Natural, Informational 
+- x1x = Happy, Positive users
+- x2x = Sad, Serious users
+- x3x = Angry, Controversial users, Keyboard Warrior, wants drama
+- x4x = Hype, Yippe Intence music, High energy
+- x5x = Chill, Relaxed , Calm , think before typing
+- x6x = Silly, :3 , yippee
+- x7x = Respectful, formal
+- x8x = Main Character, Think they are good
+- x9x = Scammer, Scammer , needs ur money 
+
+This rules makes it easier to create a post match its user personality. Because, when this just build the User and post data files is in a diffrence files
+ 
+****When cloning this repo following this rules is optional.
+
+
+create role then find it
