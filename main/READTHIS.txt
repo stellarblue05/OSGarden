@@ -1,0 +1,10 @@
+Go to 
+    system- 
+        Lilum-
+            Lilum.jsx- for current web
+
+In LilumOS components 
+    Obtain default theme by theme.[object]. See all colors in System\
+                                                                    Lilum\ 
+                                                                        Theme.jsx 
+When open localhost connect on block that have OS: Lilum-OS
