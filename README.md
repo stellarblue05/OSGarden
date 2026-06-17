@@ -2,7 +2,7 @@
 
 An oparating system simulation with virtual social media app. 
 
-![Preview] (./Data/img/p-1.jpeg)
+![Preview](./Data/img/p-1.jpeg)
 
 ## Installation
 
@@ -17,6 +17,7 @@ npm install
 
 ## Sturcture
 
+```text
 OSGarden/
 ├── Calc (For data calculation)/
 │   └── Commonnet
@@ -28,6 +29,7 @@ OSGarden/
 |
 ├── package.json
 └── README.md
+```
 
 ### Create CommonNet users , post
 
