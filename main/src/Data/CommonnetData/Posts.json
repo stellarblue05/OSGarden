@@ -313,14 +313,6 @@
     ]
   },
   {
-    "id": 14,
-    "uid": 241,
-    "c": "GET COOL SIGMA SKIBIDI TUNG PENCIL TODAY!!!",
-    "v": 55244,
-    "t": "2026-06-02T10:05:00",
-    "ty": "ads"
-  },
-  {
     "id": 15,
     "uid": 0,
     "c": "Hi, I can't sign in to my account for some reason @commonnet",
@@ -345,6 +337,104 @@
         "c": "Try reseting your password. There will be 2-step verification pop-up then  clicked \"continue\".",
         "l": 21,
         "t": "2026-06-17T01:21:41"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "uid": 9047,
+    "c": "Noodles + Cold drink never gets old.",
+    "l": 12,
+    "dl": 1,
+    "s": 0,
+    "v": 12,
+    "tag": "",
+    "t": "2026-06-17T05:44:47.962544",
+    "m": [],
+    "com": [
+      {
+        "id": 1,
+        "uid": 0,
+        "c": "OMG I GOT FREE MONEY FROM SCAMMYSCAMER.rpg CLICKLICK NOW!!!!!!",
+        "l": 0,
+        "t": "2026-06-17T05:44:44"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "uid": 9048,
+    "c": "Lilum OS 2.0 out now! with glass theme and dynamic window.",
+    "l": 2564565,
+    "dl": 4455,
+    "s": 4546,
+    "v": 2564565,
+    "tag": "",
+    "t": "2026-06-17T06:00:51.716492",
+    "m": [],
+    "com": [
+      {
+        "id": 1,
+        "uid": 0,
+        "c": "Glass? Why glass???",
+        "l": 13235,
+        "t": "2026-06-17T06:00:49"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "uid": 9050,
+    "c": "5 years old kids thats in a viral video still lives with his parent.                                  from viral video still lives with his parent!                            We investigate the location of that video and gain access to the boy's parent social media history.  <Buy I dox subscription to unlock more>",
+    "l": 95676,
+    "dl": 63689,
+    "s": 4366,
+    "v": 63900904,
+    "tag": "",
+    "t": "2026-06-17T06:53:49.565700",
+    "m": [],
+    "com": [
+      {
+        "id": 1,
+        "uid": 9047,
+        "c": "Thanks to idox. Now I feel inscure about my personal life!",
+        "l": 2655,
+        "t": "2026-06-17T06:47:22"
+      },
+      {
+        "id": 2,
+        "uid": 0,
+        "c": "Hell Yeah",
+        "l": -44,
+        "t": "2026-06-17T06:53:46"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "uid": 9051,
+    "c": "I go taken to einstien island, and got candy! :D",
+    "l": 0,
+    "dl": 567,
+    "s": 0,
+    "v": 3456,
+    "tag": "",
+    "t": "2026-06-17T07:08:15.344315",
+    "m": [],
+    "com": [
+      {
+        "id": 1,
+        "uid": 0,
+        "c": "Gaie Femboi island also give you free bobux!",
+        "l": -999,
+        "t": "2026-06-17T07:07:40"
+      },
+      {
+        "id": 2,
+        "uid": 0,
+        "c": "Show us the candy!!!",
+        "l": 0,
+        "t": "2026-06-17T07:08:10"
       }
     ]
   }
