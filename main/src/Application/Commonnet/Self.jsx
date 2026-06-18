@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SettSelf from "./SettSelf";
 
 export default function Self({
-  setCNProfile,
+  setCNprofile,
   CNtheme,
   profile,
   onBack,
@@ -97,9 +97,12 @@ export default function Self({
         </div>
         <br />
         <p className="ml-1 font-[500] poppins text-sm rounded">Posts {">"}</p>
-        <hr className="opacity-50" />
 
-         {edit && <SettSelf CNprofile={CNprofile} setCNProfile={setCNProfile} CNtheme={CNtheme} onBack={() => setEdit((prev) => !prev)}/>}
+
+
+
+        <hr className="opacity-50" />
+         {edit && <SettSelf CNprofile={CNprofile} setCNprofile={setCNprofile} CNtheme={CNtheme} onBack={() => setEdit((prev) => !prev)}/>}
       </div>
 
      

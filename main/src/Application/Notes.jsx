@@ -17,8 +17,8 @@ const Notes = (props) => {
       <div className="w-full h-full overflow-hidden">
         <textarea
           name="Notes"
-          id="1"
-          className="resize-none w-full h-full  outline-none"
+          id="1" 
+          className="p-1 resize-none w-full h-full outline-none inter lilum-scroll"
           style={{ color: theme.text, backgroundColor: theme.pri}}
         ></textarea>
       </div>

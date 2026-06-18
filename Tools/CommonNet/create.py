@@ -1,5 +1,5 @@
 import json
-import random
+
 from pathlib import Path
 from datetime import datetime
 
@@ -32,13 +32,12 @@ def create_user():
     print("==== Create User ====")
     print("Blank = auto")
 
-    uid_input = input("ID: ")
+    uid_input = input("ID (number): ")
 
     if uid_input:
         uid = int(uid_input)
     else:
-        uid = len(users_data)
-        uid = int(f"90{uid}")
+        uid = max((user["id"] for user in users_data), default=0) + 1
 
     username = input("Username: ").strip()
 
@@ -47,10 +46,52 @@ def create_user():
 
     while len(username) < 3 or len(username) > 20:
         print("Username must be 3-20 characters.")
-        username = input("Username: ").strip().replace(" ", "_")
+        username = input("Username: ").strip()
 
     name = input("Name: ").strip() or username
+
+    username = username.replace(" ", "_")
+    
     bio = input("Bio: ").strip()
+
+    print("""
+\n--- Role? ---
+
+0. avarage joe
+1. admin
+2. company
+3. influencer
+4. news/memes
+5. adult 
+6. kid
+7. educational
+8. goverment
+9. bot / scammer
+           
+""")
+    dwag = input("> ")
+
+    match dwag:
+        case "1":
+            role="admin"
+        case "2":
+            role="com"
+        case "3":
+            role="influ"
+        case "4":
+            role="news"
+        case "5":
+            role="adult"
+        case "6":
+            role = "kid"
+        case "7":
+            role = "edu"
+        case "8":
+            role = "gov"
+        case "9":
+            role = "bot" 
+        case _:
+            role = "avg"
 
     try:
         follower = int(input("Followers: ") or 0)
@@ -64,10 +105,7 @@ def create_user():
 
     print("Verified? (Y/N)")
     ver = input("> ")
-    if ver == "Y" or "y" or "1":
-        verified = True
-    else:
-        verified = False
+    verified = ver.lower() in ["y", "yes", "1"]
 
     print("Example NewYork, USA")
     location = input(">")
@@ -86,8 +124,8 @@ def create_user():
         "ing": following,
         "t": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
         "ver": verified,
-        "loc": location
-
+        "loc": location,
+        "role": role
     }
 
     users_data.append(user)
@@ -96,13 +134,16 @@ def create_user():
 
     print(f"✓ User created ({uid})")
 
-    print("Do you want to create a post for this account? (Y/N)")
+    print("Do you want to create a post for this account? (y/n)")
     sigma_skibidi = input(">")
 
-    if sigma_skibidi == "Y" or "y" or "1":
-        sigma_skibidi
+    joe = sigma_skibidi.lower() in ["y", "yes", "1"]
+
+    if joe:
+        create_post()
     else:
         return uid
+    
 
 
 def create_post():
@@ -179,7 +220,7 @@ def create_post():
 
 
 
-    if views < like or dislike:
+    if views < max(like, dislike):
         views = views + max(like, dislike)
     
 

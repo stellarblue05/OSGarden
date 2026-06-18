@@ -19,9 +19,10 @@ export function ProfileProvider({ children }) {
         bio: "I am fish ~>(  ')",
         fer: 0,
         ing: 0,
-        "t": "2019-06-12T14:04:24",
-        "ty": "self",
-        "col": "#F7CAC9"
+        t: "2019-06-12T14:04:24",
+        ty: "self",
+        col: "#F7CAC9",
+        posts: []
       }
     },
   });

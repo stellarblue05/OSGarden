@@ -16,7 +16,7 @@ const Commonnet = (props) => {
     const profile = profiles?.lilum;
     const CNprofile = profile?.cn;
 
-    function setCNProfile(e) {
+    function setCNprofile(e) {
     setProfiles(prev => ({
       ...prev,
       lilum: {
@@ -76,7 +76,7 @@ const Commonnet = (props) => {
     return(<Profile CNtheme={CNtheme} Posts={Posts} userId={page.userId} onBack={() => setPage({type: "feed"})} Users={Users} />)
   }
   if (page.type === "self") {
-    return(<Self CNtheme={CNtheme} onBack={() => setPage({type: "feed"})} profile={profile} setCNProfile={setCNProfile} CNprofile={CNprofile}/>)
+    return(<Self CNtheme={CNtheme} onBack={() => setPage({type: "feed"})} profile={profile} setCNprofile={setCNprofile} CNprofile={CNprofile}/>)
   }
   else {
     return(<Feeds CNtheme={CNtheme} setPage={setPage} Users={Users} Posts={Posts} theme={theme} CNprofile={CNprofile}/>)

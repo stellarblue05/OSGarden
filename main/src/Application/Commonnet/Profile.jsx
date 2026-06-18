@@ -1,9 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Post from "./Post.jsx";
 export default function ({ CNtheme, onBack, userId, Users, Posts , theme}) {
-  const user = useMemo(() => {
-    return Users.find((u) => u.id === userId)
-  }, [Users, userId]);
+
+const user = Users.find((u) => u.id === userId);
+
+if (!user) {
+  return <div>User not found</div>;
+}
 
   const userPosts = Posts.filter((e) => {
     return e?.uid == userId;
@@ -55,6 +58,8 @@ export default function ({ CNtheme, onBack, userId, Users, Posts , theme}) {
           <p className="text-sm leading-0 opacity-45">@{user.un}</p>
         </div>
 
+        {user.role !== "anym" && <>
+
         <div className="m-1 mt-2">
           <p className="text-sm opacity-95">{user.bio}</p>
         </div>
@@ -92,9 +97,11 @@ export default function ({ CNtheme, onBack, userId, Users, Posts , theme}) {
           </div>
         </div>
         <br />
+       
         <p className="ml-1 font-[500] poppins text-sm rounded">Posts {">"}</p>
-        <hr className="opacity-50" />
+        <hr className="opacity-50" /></>}
       </div>
+      {user.role !== "anym" &&
       <div className="mx-2 mb-2">
         {userPosts?.map((post) => (
           <Post
@@ -109,7 +116,7 @@ export default function ({ CNtheme, onBack, userId, Users, Posts , theme}) {
             }}
           />
         ))}
-      </div>
+      </div>}
     </div>
   );
 }
