@@ -25,19 +25,14 @@ export default function SettSelf({ CNprofile, setCNprofile, onBack, CNtheme }) {
     >
       <div className="flex">
         <button
-          onClick={onBack}
+          onClick={onSave}
           style={{ color: CNtheme.text }}
           className=" hover:backdrop-brightness-50 flex center transition rounded-full"
         >
           <span className="material-symbols-outlined">arrow_back_ios_new</span>{" "}
-          <p className="ml-1 poppins opacity-75">Work in progress</p>
-        </button>
-
-        <button onClick={onSave} className="bg-white">
           <p>Save</p>
         </button>
       </div>
-      <hr className="opacity-30" />
 
       <div
         className="w-full h-20 relative"
@@ -53,7 +48,7 @@ export default function SettSelf({ CNprofile, setCNprofile, onBack, CNtheme }) {
       <div className="ml-2 mt-10 w-full flex gap-[1em] relative">
         <p className=" opacity-50">name:</p>
         <input
-          className="poppins font-bold text-lg opacity-100 leading-0 w-7/10"
+          className="poppins outline-none font-bold text-lg opacity-100 leading-0 w-7/10"
           maxLength={20}
           defaultValue={user?.name}
           style={{ borderBottom: `2px solid ${CNtheme.shadow}` }}
@@ -61,10 +56,10 @@ export default function SettSelf({ CNprofile, setCNprofile, onBack, CNtheme }) {
         />
       </div>
 
-      <div className="ml-2 mt-3 w-full flex flex-col relative ">
+      <div className="ml-2 mb-5 w-full flex flex-col relative ">
         <p className="opacity-50">bio:</p>
         <textarea
-          className="poppins opacity-100 p-2 resize-y max-w-[90%] rounded-2xl"
+          className="poppins opacity-100 p-2 resize-y max-w-[90%] max-h-40 outline-none rounded-2xl lilum-scroll"
           ref={bioRef}
           defaultValue={user?.bio}
           style={{ border: `2px solid ${CNtheme.shadow}` }}

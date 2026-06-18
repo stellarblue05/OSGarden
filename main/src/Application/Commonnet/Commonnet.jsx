@@ -16,7 +16,7 @@ const Commonnet = (props) => {
     const profile = profiles?.lilum;
     const CNprofile = profile?.cn;
 
-    function setCNProfile(e) {
+    function setCNprofile(e) {
     setProfiles(prev => ({
       ...prev,
       lilum: {

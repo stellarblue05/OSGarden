@@ -58,6 +58,8 @@ if (!user) {
           <p className="text-sm leading-0 opacity-45">@{user.un}</p>
         </div>
 
+        {user.role !== "anym" && <>
+
         <div className="m-1 mt-2">
           <p className="text-sm opacity-95">{user.bio}</p>
         </div>
@@ -95,7 +97,7 @@ if (!user) {
           </div>
         </div>
         <br />
-        {user.role !== "anym" && <>
+       
         <p className="ml-1 font-[500] poppins text-sm rounded">Posts {">"}</p>
         <hr className="opacity-50" /></>}
       </div>

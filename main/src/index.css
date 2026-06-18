@@ -77,6 +77,10 @@ body{
   font-family:  Inter, Arial, Helvetica, sans-serif;
 }
 
+.jetbrains {
+  font-family: "JetBrains Mono", monospace;
+}
+
 .anton {
   font-family: Anton, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
