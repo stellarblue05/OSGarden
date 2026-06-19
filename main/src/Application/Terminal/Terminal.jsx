@@ -38,7 +38,7 @@ const Terminal = (props) => {
   function onSubmit(e) {
     e.preventDefault();
 
-    if (cmdInput === "clear" ) {
+    if (cmdInput.trim().toLowerCase() === "clear" || cmdInput.trim().toLowerCase() === "clr"   ) {
       setHistory([]);
       setCmdInput("");
       return;
