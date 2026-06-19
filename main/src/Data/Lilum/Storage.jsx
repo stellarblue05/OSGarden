@@ -1,35 +1,48 @@
-import { Children, createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const LilumStorageContext = createContext();
 
 const initialStorage = {
-    name: "Root",
-    type: "folder",
-    children: {
-        Users: {
-            name: "Users",
-            type: "folder",
-            children: {
-                Daisy: {
-                    name: "Daisy",
-                    type: "folder",
-                    children: {
-                        Desktop: {name: "Dasktop", type: "folder", children: {},
-                        Documents: {name: "Documents", type: "folder", children: {}}
-                    }
-                    }
-                }
-            }
-        }
-    }
-}
+  name: "Root",
+  type: "folder",
+  children: {
+    Users: {
+      name: "Users",
+      type: "folder",
+      children: {
+        Daisy: {
+          name: "Daisy",
+          type: "folder",
+          children: {
+            Desktop: {
+              name: "Desktop",
+              type: "folder",
+              children: {},
+            },
+            Documents: {
+              name: "Documents",
+              type: "folder",
+              children: {
+                Text: {
+                  name: "Text.txt",
+                  type: "text",
+                  content: "Lorem Ipsum umor si amet",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
 
-export function LilumStorageProvider({children}) {
-    const [storage, setStorage] = useState(initialStorage)
-    const [currentPath, setCurrentPath] = useState(["Users", "Daisy"])
+export function LilumStorageProvider({ children }) {
+  const [storage, setStorage] = useState(initialStorage);
+  const [currentPath, setCurrentPath] = useState(["Users", "Daisy"]);
 
-    return(
-       <LilumStorageContext.Provider
+  return (
+    <LilumStorageContext.Provider
       value={{ storage, setStorage, currentPath, setCurrentPath }}
     >
       {children}
@@ -37,8 +50,6 @@ export function LilumStorageProvider({children}) {
   );
 }
 
-
-
 export function useLilumStorage() {
-    return useContext(LilumStorageContext)
+  return useContext(LilumStorageContext);
 }

@@ -15,6 +15,7 @@ const PopUp = ({
   style,
   fullStyle,
   bodyStyle,
+  mainStyle
 }) => {
   const { setNodeRef, listeners, attributes, transform, isDragging } =
     useDraggable({ id: id });
@@ -65,7 +66,7 @@ const PopUp = ({
         </button>
       </div>
 
-      <div className={`flex-1 overflow-auto ${bodyStyle && bodyStyle}`} >{children}</div>
+      <div className={`flex-1 overflow-auto ${bodyStyle && bodyStyle}`} style={{...mainStyle}}>{children}</div>
     </div>
   );
 };

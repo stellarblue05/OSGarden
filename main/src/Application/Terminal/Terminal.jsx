@@ -22,13 +22,21 @@ const Terminal = (props) => {
 
   const [cmdInput, setCmdInput] = useState("");
   const inputRef = useRef(null);
-
   const currentPathText = "C:/" + currentPath.join("/");
-
   const bottomRef = useRef(null);
+
+  const [prompt, setPrompt] = useState(currentPathText)
+
+  const [terStyle, setTerStyle] = useState({
+    backgroundColor: "",
+    color: theme.text
+  })
+
 
   useEffect(() => {
     inputRef.current?.focus();
+
+
   }, []);
 
   useEffect(() => {
@@ -38,20 +46,25 @@ const Terminal = (props) => {
   function onSubmit(e) {
     e.preventDefault();
 
-    if (cmdInput === "clear" ) {
+    //Clear
+    if (cmdInput.trim().toLowerCase() === "clear" || cmdInput.trim().toLowerCase() === "clr"   ) {
       setHistory([]);
       setCmdInput("");
       return;
     }
 
+
+
     const pathBeforeCmd = currentPathText;
 
     const output = runCommand({
       cmdInput,
-      storage,
+      storage,   
       setStorage,
       currentPath,
       setCurrentPath,
+      setPrompt,
+      setTerStyle
     });
 
         setHistory((prev) => [
@@ -74,29 +87,32 @@ const Terminal = (props) => {
     setCmdInput("");
   }
 
+
   return (
     <PopUp
       title="Terminal"
-      {...props}
-      style={{ backgroundColor: theme.bg, backdropFilter: "blur(5px)" }}
+      {...props}        
+      style={{ backgroundColor: theme.bg, backdropFilter: "blur(5px)"}}
       handleStyle={{ color: theme.text }}
-      bodyStyle="scroll-thin lilum-scroll \\in tailwind "
+      bodyStyle={`scroll-thin lilum-scroll  `}
       XStyle={{}} /* The X button style */
       fullStyle={{}} /* The full button style */
+      mainStyle={{...terStyle}}
     >
       <div
-        className="inset-0 relative jetbrains p-1 text-sm"
-        style={{ color: theme.text }}
+        className={`inset-0 relative jetbrains p-1 text-sm `} 
+        style={{ lineHeight: "1.2em" }}
         onClick={() => inputRef.current?.focus()}
       >
         <form onSubmit={onSubmit}>
           {history.map((cmd, index) => (
-            <p key={index}>
-              {cmd.type === "input" ? `${cmd.path} > ${cmd.text}` : cmd.text}
+            
+            <p key={index} style={{marginBottom: cmd.type === "output" ? "7px" : "0" }}>
+              {cmd.type === "input" ? `${prompt}> ${cmd.text}` : cmd.text}
             </p>
           ))}
 
-          <span>{currentPathText}{">"}</span>
+          <span>{prompt}&gt;</span>
 
           <input
             value={cmdInput}
