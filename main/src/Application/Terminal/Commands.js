@@ -271,7 +271,7 @@ export function runCommand({
       const [command, ...args] = cmdInput.trim().split(/\s+/);
       const target = args.join(" ");
       setPrompt(target);
-      return setPrompt;
+      return true;
     }
     case "color": {
       let e;

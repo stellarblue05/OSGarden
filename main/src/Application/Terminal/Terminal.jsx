@@ -25,7 +25,7 @@ const Terminal = (props) => {
   const currentPathText = "C:/" + currentPath.join("/");
   const bottomRef = useRef(null);
 
-  const [prompt, setPrompt] = useState(currentPathText)
+  const [prompt, setPrompt] = useState('')
 
   const [terStyle, setTerStyle] = useState({
     backgroundColor: "",
@@ -87,6 +87,8 @@ const Terminal = (props) => {
     setCmdInput("");
   }
 
+  const promptText = prompt || currentPathText
+
 
   return (
     <PopUp
@@ -108,11 +110,11 @@ const Terminal = (props) => {
           {history.map((cmd, index) => (
             
             <p key={index} style={{marginBottom: cmd.type === "output" ? "7px" : "0" }}>
-              {cmd.type === "input" ? `${prompt}> ${cmd.text}` : cmd.text}
+              {cmd.type === "input" ? `${promptText}> ${cmd.text}` : cmd.text}
             </p>
           ))}
 
-          <span>{prompt}&gt;</span>
+          <span>{promptText}&gt;</span>
 
           <input
             value={cmdInput}
