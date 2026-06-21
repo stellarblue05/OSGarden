@@ -63,8 +63,11 @@ const ThisPC = (props) => {
   }
 
   function openFolder(name, item) {
-    if (!isFolder(item)) return;
-
+    if (!isFolder(item)) {
+      console.log(item);
+      console.log(item.content);
+      return;
+    }
     setPcPath((prev) => [...prev, name]);
   }
 

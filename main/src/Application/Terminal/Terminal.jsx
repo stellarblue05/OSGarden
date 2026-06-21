@@ -70,6 +70,7 @@ const Terminal = (props) => {
         setHistory((prev) => [
       ...prev,
       {
+        prompt: promptText,
         type: "input",
         path: pathBeforeCmd,
         text: cmdInput,
@@ -110,7 +111,7 @@ const Terminal = (props) => {
           {history.map((cmd, index) => (
             
             <p key={index} style={{marginBottom: cmd.type === "output" ? "7px" : "0" }}>
-              {cmd.type === "input" ? `${promptText}> ${cmd.text}` : cmd.text}
+              {cmd.type === "input" ? `${cmd.prompt}> ${cmd.text}` : cmd.text}
             </p>
           ))}
 

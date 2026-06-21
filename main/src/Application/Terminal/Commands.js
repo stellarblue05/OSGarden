@@ -23,48 +23,45 @@ export function runCommand({
     return dir;
   }
 
-  function createFile(name, content) {
-    name = name.trim();
-    if (!name) return "missing file name";
+  function createFile(name, content = "") {
+  name = name.trim();
+  if (!name) return "missing file name";
 
-    const dir = getDir();
+  const dir = getDir();
 
-    if (!dir) return "Folder not found";
-    if (dir.children?.[name]) return `${name}: already exists`;
+  if (!dir) return "Folder not found";
+  if (dir.children?.[name]) return `${name}: already exists`;
 
-    const forbidden = ["<", ">", ":", '"', "/", "\\", "|", "?", "*"];
+  const forbidden = ["<", ">", ":", '"', "/", "\\", "|", "?", "*"];
 
-    if (forbidden.some((char) => name.includes(char))) {
-      return "filename contain invalid characters";
-    }
-
-    const parts = name.split(".");
-
-    const ext = parts.length > 1 ? parts.pop() : "";
-
-    const fileName = parts.length ? parts.join(".") : name;
-
-    const type = getExtType(ext, content);
-
-    const newStorage = structuredClone(storage);
-    let newFile = newStorage;
-
-    for (const part of currentPath) {
-      newFile = newFile.children[part];
-    }
-
-    newFile.children[target] = {
-      baseName: fileName,
-      ext,
-      name: `${fileName}.${ext}`,
-      type,
-      content,
-    };
-
-    setStorage(newStorage);
-    return true;
+  if (forbidden.some((char) => name.includes(char))) {
+    return "filename contains invalid characters";
   }
 
+  const parts = name.split(".");
+  const ext = parts.length > 1 ? parts.pop().toLowerCase() : "";
+  const fileName = parts.length ? parts.join(".") : name;
+  const kind = getExtType(ext, content)
+
+  const newStorage = structuredClone(storage);
+  let newFile = newStorage;
+  
+
+  for (const part of currentPath) {
+    newFile = newFile.children[part];
+  }
+
+  newFile.children[name] = {
+    ext,
+    name: `${fileName}${ext ? "." : ""}${ext}`,
+    type: "file",
+    kind,
+    content,
+  };
+
+  setStorage(newStorage);
+  return true;
+}
   function getExtType(ext, content) {
     let type;
 
@@ -83,25 +80,31 @@ export function runCommand({
     return type;
   }
 
-  function getContentType(content) {
-    if (!content) return "empty";
+  function getFileType(ext, content) {
+  ext = String(ext || "").toLowerCase();
 
-    const localPathRegex = /^(\.\/|\.\.\/|\/)[^?\s]+\.[a-zA-Z0-9]+$/;
+  if (!content) return "empty";
 
-    if (typeof content === "string" && localPathRegex.test(content)) {
-      return "image data, 8-bit/color RGB";
-    }
-    if (/[^\x00-\x7f]/.test(content)) {
-      return "Unicode text, UTF-8 text";
-    }
-    if (!/[^\x00-\x7f]/.test(content)) {
+  switch (ext) {
+    case "":
+    case "txt":
+      if (/[^\x00-\x7f]/.test(content)) {
+        return "Unicode text, UTF-8 text";
+      }
+
       return "ASCII text";
-    } else {
-      return "data";
-    }
 
-    return "";
+    case "png":
+      return "PNG image data, 8-bit/color RGB";
+
+    case "jpg":
+    case "jpeg":
+      return "JPEG image data";
+
+    default:
+      return "data";
   }
+}
 
   function getColor(hex) {
     hex = String(hex).toUpperCase();
@@ -159,7 +162,7 @@ export function runCommand({
 
       if (!dir) return "Folder not found";
 
-      const names = Object.keys(dir.children || {});
+      const names = Object.values(dir.children || {}).map((item) => item.name);
 
       return names.length ? names.join("  ") : "Empty folder";
     }
@@ -244,12 +247,18 @@ export function runCommand({
       if (!target) return "file: missing file name";
 
       const dir = getDir();
-      if (!dir) return "file: file not found";
-      if (!dir.children?.[target]) return `file: ${target} not found`;
+      if (!dir) return "file: folder not found";
 
-      const content = dir.children?.content;
+      const item = dir.children?.[target];
+      if (!item) return `file: ${target}: not found`;
 
-      const type = getContentType(content);
+      if (item.type === "folder" || item.type === "dir") {
+        return `${target}: directory`;
+      }
+
+      
+      const type = getFileType(item.ext, item.content);
+
       return `${target}: ${type}`;
     }
 
@@ -306,7 +315,7 @@ export function runCommand({
         setTerStyle((prev) => ({
           ...prev,
           color: txtCol,
-          backgroundColor: bgCol, 
+          backgroundColor: bgCol,
         }));
       }
 
