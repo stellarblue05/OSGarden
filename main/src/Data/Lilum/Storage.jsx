@@ -23,9 +23,10 @@ const initialStorage = {
               name: "Documents",
               type: "folder",
               children: {
-                Text: {
+                "Text.txt": {
                   name: "Text.txt",
-                  type: "text",
+                  ext: "txt",
+                  type: "file",
                   content: "Lorem Ipsum umor si amet",
                 },
               },

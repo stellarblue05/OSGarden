@@ -11,7 +11,7 @@ export function ProfileProvider({ children }) {
       device: "Ampro Pad 12",
       email: "Daisy1280@Promail.com",
       bio: "Getting bored today.",
-      location: "Bangkok, Thailand",
+      location: "Earth, Virgo Supercluster",
       cn: {
         pfp: "/pfp/C-1.png",
         username: "Adarkmage",
