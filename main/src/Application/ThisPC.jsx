@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import PopUp from "../Component/Pop-up";
-import { useLilumTheme } from "../Systems/Lilum/Theme";
-import { useLilumStorage } from "../Data/Lilum/Storage";
+import { components, useLilum } from "../Systems/Lilum/Kernel";
+import FileViewer from "./FileViewer";
 
 const ThisPC = (props) => {
-  const { theme } = useLilumTheme();
-  const { storage, setStorage } = useLilumStorage();
+  const { storage, theme, open, openWindow } = useLilum();
 
   const [newDirName, setNewDirName] = useState("");
 
@@ -30,7 +29,7 @@ const ThisPC = (props) => {
     return item?.type === "folder" || item?.type === "dir";
   }
 
-  const pathText = pcPath.join("/")
+  const pathText = pcPath.join("/");
   const currentDir = getDir(pcPath);
   const items = Object.entries(currentDir?.children || {});
 
@@ -48,8 +47,6 @@ const ThisPC = (props) => {
       dir = dir.children[part];
     }
 
-
-
     name = name.replaceAll(" ", "_");
 
     dir.children[name] = {
@@ -64,9 +61,7 @@ const ThisPC = (props) => {
 
   function openFolder(name, item) {
     if (!isFolder(item)) {
-      console.log(item);
-      console.log(item.content);
-      return;
+      return null;
     }
     setPcPath((prev) => [...prev, name]);
   }
@@ -79,6 +74,21 @@ const ThisPC = (props) => {
     setPcPath([]);
   }
 
+  function openFile(name, item) {
+    if (!item) return null;
+    if (isFolder(item)) {
+      openFolder(name, item);
+      return null;
+    }
+
+    openWindow({
+      id: `file-${name}`,
+      title: name,
+      component: "FileViewer",
+      content: item.content,
+    });
+  }
+
   return (
     <PopUp
       title="This PC"
@@ -89,8 +99,10 @@ const ThisPC = (props) => {
     >
       <div className="h-full p-2" style={{ color: theme.text }}>
         <div className="flex mb-2">
-          <button className="mr-2"onClick={onBack}>Back</button>
-          <button onClick={onRoot} >C:/</button>
+          <button className="mr-2" onClick={onBack}>
+            Back
+          </button>
+          <button onClick={onRoot}>C:/</button>
           <p>{pathText}</p>
         </div>
 
@@ -112,7 +124,7 @@ const ThisPC = (props) => {
         ) : (
           <div className="flex flex-wrap gap-3">
             {items.map(([name, item]) => (
-              <button key={name} onClick={() => openFolder(name, item)}>
+              <button key={name} onClick={() => openFile(name, item)}>
                 <span className="material-symbols-outlined">
                   {isFolder(item) ? "folder" : "description"}
                 </span>

@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import PopUp from "../../Component/Pop-up";
-import { useLilumTheme } from "../../Systems/Lilum/Theme";
-import { useLilumStorage } from "../../Data/Lilum/Storage";
+import { useLilum } from "../../Systems/Lilum/Kernel";
 import { runCommand } from "./Commands";
 
 const Terminal = (props) => {
-  const { theme } = useLilumTheme();
-  const { storage, setStorage, currentPath, setCurrentPath } =
-    useLilumStorage();
+  const { theme, storage, setStorage, currentPath, setCurrentPath } = useLilum();
 
   const [history, setHistory] = useState([
     {

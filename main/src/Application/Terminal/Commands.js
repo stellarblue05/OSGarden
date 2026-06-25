@@ -148,6 +148,9 @@ export function runCommand({
     }
   }
 
+  const dir = getDir()
+  if (!dir) return  "Folder not found"
+
   switch (command) {
     case "":
       return "";
@@ -158,10 +161,6 @@ export function runCommand({
       return "C:/" + currentPath.join("/");
 
     case "ls": {
-      const dir = getDir();
-
-      if (!dir) return "Folder not found";
-
       const names = Object.values(dir.children || {}).map((item) => item.name);
 
       return names.length ? names.join("  ") : "Empty folder";
@@ -195,9 +194,6 @@ export function runCommand({
     case "mkdir": {
       if (!target) return "mkdir: missing folder name";
 
-      const dir = getDir();
-
-      if (!dir) return "Folder not found";
       if (dir.children?.[target]) return `mkdir: ${target}: already exists`;
 
       const newStorage = structuredClone(storage);
@@ -219,10 +215,9 @@ export function runCommand({
     case "rmdir": {
       if (!target) return "rmdir: missing folder name";
 
-      const dir = getDir();
 
-      if (!dir) return "Folder not found";
       if (!dir.children?.[target]) return `rmdir: ${target}: not found`;
+
       if (dir.children[target].type !== "folder")
         return `rmdir: ${target}: not a folder`;
 
@@ -233,21 +228,37 @@ export function runCommand({
         newDir = newDir.children[part];
       }
 
-      if (Object.keys(newDir.children[target].children).length > 0) {
-        return `rmdir: ${target}: folder not empty`;
-      }
-
       delete newDir.children[target];
 
       setStorage(newStorage);
       return "";
     }
 
+    case "rm" : {
+      if (!target) return "rm: missing file name";
+
+      const dir = getDir();
+      const item = dir.children?.[target]
+      if (!item) return `rm: ${target} not found`
+      if (dir.children[target].type === "folder")
+        return `rm: ${target} is a folder use [rmdir] instead`;
+
+      const newStorage = structuredClone(storage)
+
+      let newDir = newStorage
+
+      for (const part of currentPath) {
+         newDir = newDir.children[part];
+      }
+
+      delete newDir.children[target]
+      setStorage(newStorage)
+      return ""
+    }
+
     case "file": {
       if (!target) return "file: missing file name";
 
-      const dir = getDir();
-      if (!dir) return "file: folder not found";
 
       const item = dir.children?.[target];
       if (!item) return `file: ${target}: not found`;

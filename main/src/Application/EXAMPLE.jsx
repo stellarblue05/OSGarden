@@ -9,7 +9,7 @@ const Example = (props) => {
     <PopUp
       title="Name"
       {...props}
-      style={{ backgroundColor: theme.bg, backdropFilter: "blur(5px)" }}
+      style={{ backgroundColor: theme.bg,color: theme.text, backdropFilter: "blur(5px)" }}
 
       handleStyle={{ color: theme.text }}
 
@@ -20,6 +20,7 @@ const Example = (props) => {
       fullStyle={{}} /* The full button style */
     >
           {/* Content here */}
+          Hello World
     </PopUp>
   );
 };
