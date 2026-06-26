@@ -1,10 +1,10 @@
 import React from "react";
-import { DndContext } from "@dnd-kit/core";
-import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 import { LilumThemeContext } from "./Theme.jsx";
 import { useProfile } from "../../Data/Profile.jsx";
 import { useLilum, components } from "./Kernel.jsx";
+
+import { useGlobal } from "../../Global.jsx";
 
 import ClockBar from "./ClockBar.jsx";
 import ProfileBar from "./ProfileBar.jsx";
@@ -17,16 +17,15 @@ const Lilum = () => {
     dark,
     setDark,
     theme,
-    open,
     clockBar,
     setClockBar,
     profileBar,
-    setProfileBar,
-    openWindow,
-    closeWindow,
-    focusWindow,
-    handleDrop,
+    setProfileBar
   } = useLilum();
+
+  const {
+     getExtType, getFileType, openWindow, closeWindow,open, focusWindow, handleDrop 
+  } = useGlobal()
 
   //Find apps in desktop storage
   const apps = Object.entries(
@@ -119,56 +118,53 @@ const Lilum = () => {
         {profileBar && <ProfileBar profile={profile} setProfile={setProfile} />}
 
         {/* Apps */}
-        <div className="w-screen h-screen overflow-hidden relative">
-          <DndContext
-            onDragEnd={handleDrop}
-            modifiers={[restrictToWindowEdges]}
+        <div className="w-screen h-screen relative overflow-hidden">
+          {open.map((e) => {
+            const AppComponent = components[e.component];
+
+            if (!AppComponent) return null;
+
+            const { key, ...item } = e;
+
+            return (
+              <div
+                key={key || e.id}
+              >
+                <AppComponent
+                  {...item}
+                  onClose={() => closeWindow(e.id)}
+                  focus={focusWindow}
+                />
+              </div>
+            );
+          })}
+
+          {/* Dock */}
+          <div
+            className="flex gap-5 transition-all m-2 absolute bottom-0 right-[50%] translate-x-1/2 p-2 rounded-lg border border-[#828282aa] backdrop-blur-[2px] scale-90"
+            style={{ backgroundColor: theme.bg }}
           >
-            {open.map((e) => {
-              const AppComponent = components[e.component];
-
-              if (!AppComponent) return null;
-
-              const { key, ...item } = e;
-
-              return (
-                <div key={key || e.id} style={{ zIndex: e.z }}>
-                  <AppComponent
-                    {...item}
-                    onClose={() => closeWindow(e.id)}
-                    focus={focusWindow}
-                  />
-                </div>
-              );
-            })}
-
-            {/* Dock */}
-            <div
-              className="flex gap-5 transition-all m-2 absolute bottom-0 right-[50%] translate-x-1/2 p-2 rounded-lg border border-[#828282aa] backdrop-blur-[2px] scale-90"
-              style={{ backgroundColor: theme.bg }}
-            >
-              {apps.map((e) => (
-                <div
-                  key={e.id}
-                  className="flex flex-col center relative group transition"
-                  style={{ color: "white" }}
+            {apps.map((e) => (
+              <div
+                key={e.id}
+                className="flex flex-col center relative group transition"
+                style={{ color: "white" }}
+              >
+                <p
+                  className="font-sans whitespace-nowrap leading-none mb-1 nunito transition hidden group-hover:block"
+                  style={{ textShadow: "1px 1px 1px #33333373" }}
                 >
-                  <p
-                    className="font-sans whitespace-nowrap leading-none mb-1 nunito transition hidden group-hover:block"
-                    style={{ textShadow: "1px 1px 1px #33333373" }}
-                  >
-                    {e.title}
-                  </p>
-                  <button
-                    className="h-13 w-13 rounded-xl opacity-[0.95] overflow-hidden transition-transform hover:scale-105 flex justify-center items-center"
-                    onClick={() => openWindow(e)}
-                  >
-                    {renderIcon(e)}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </DndContext>
+                  {e.title}
+                </p>
+                <button
+                  className="h-13 w-13 rounded-xl opacity-[0.95] overflow-hidden transition-transform hover:scale-105 flex justify-center items-center"
+                  onClick={() => openWindow(e)}
+                >
+                  {renderIcon(e)}
+                </button>
+              </div>
+            ))}
+          </div>
 
           <img
             src="/Wallpapers/L-1.png"

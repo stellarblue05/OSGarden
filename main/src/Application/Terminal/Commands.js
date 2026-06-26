@@ -62,6 +62,8 @@ export function runCommand({
   setStorage(newStorage);
   return true;
 }
+
+
   function getExtType(ext, content) {
     let type;
 

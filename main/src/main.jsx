@@ -5,16 +5,21 @@ import "./index.css";
 import App from "./App.jsx";
 import Start from "./Start.jsx";
 import Lilum from "./Systems/Lilum/Lilum.jsx";
-import Error from "./Error.jsx";
+import Error from "./Component/Error.jsx";
 
+import { GlobalProvider } from "./Global.jsx";
 
-//Storage 
-import { LilumProvider } from './Systems/Lilum/Kernel.jsx'
+//Storage
+import { LilumProvider } from "./Systems/Lilum/Kernel.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <GlobalProvider>
+        <App />
+      </GlobalProvider>
+    ),
     errorElement: <Error />,
     children: [
       {

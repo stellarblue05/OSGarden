@@ -18,7 +18,7 @@ const PopUp = ({
   mainStyle
 }) => {
   const { setNodeRef, listeners, attributes, transform, isDragging } =
-    useDraggable({ id: id });
+    useDraggable({ id });
   const [full, setFull] = useState(false);
 
 

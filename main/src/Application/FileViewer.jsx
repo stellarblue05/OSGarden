@@ -1,22 +1,31 @@
 import { useLilumTheme } from "../Systems/Lilum/Theme";
 import PopUp from "../Component/Pop-up";
-const FileViewer = ({ title, content, ...props }) => {
+
+const FileViewer = ({ title, content , type, ...props }) => {
   const { theme } = useLilumTheme();
 
+  //.txt = text :)
   return (
     <PopUp
       title={title}
       {...props}
       style={{
-        backgroundColor: theme.bg,
-        backdropFilter: "blur(5px)"
+        backgroundColor: theme.sec,
+        color: theme.text 
       }}
       handleStyle={{ color: theme.text }}
       bodyStyle="scroll-thin lilum-scroll"
     >
-      <pre style={{ color: theme.text }}>
+     {type === "text" && <pre >
         {content}
-      </pre>
+      </pre> }
+      {
+        type === "img" && 
+        <div className="w-full h-full flex center">
+          <img src={content} alt="Image not loaded :(" />
+        </div>
+  
+      }
     </PopUp>
   );
 };

@@ -109,50 +109,10 @@ export function LilumProvider({ children }) {
 
   //Pop-ups
 
-  const [open, setOpen] = useState([]);
+
   const [clockBar, setClockBar] = useState(false);
   const [profileBar, setProfileBar] = useState(false);
   
-  function openWindow(app) {
-    const opened = open.find((e) => e.id === app.id);
-
-    if (opened) {
-      focusWindow(app.id);
-      return;
-    }
-
-    setOpen((prev) => {
-      const nextZ = Math.max(0, ...prev.map((p) => p.z || 0)) + 1;
-
-      return [
-        ...prev,
-        {
-          ...app,
-          z: nextZ,
-          x: prev.length * 20 + 100,
-          y: prev.length * 20 + 100,
-        },
-      ];
-    });
-  }
-  function closeWindow(id) {
-    setOpen((prev) => prev.filter((e) => e.id !== id));
-  }
-
-  function focusWindow(id) {
-    setOpen((prev) => {
-      const maxZ = Math.max(0, ...prev.map((p) => Number(p.z) || 0));
-      return prev.map((p) => (p.id === id ? { ...p, z: maxZ + 1 } : p));
-    });
-  }
-
-  function handleDrop({ active, delta }) {
-    setOpen((prev) =>
-      prev.map((p) =>
-        p.id === active.id ? { ...p, x: p.x + delta.x, y: p.y + delta.y } : p,
-      ),
-    );
-  }
 
   return (
     <LilumContext.Provider
@@ -167,15 +127,10 @@ export function LilumProvider({ children }) {
         setDark,
         theme,
         // Windows
-        open,
         clockBar,
         setClockBar,
         profileBar,
         setProfileBar,
-        openWindow,
-        closeWindow,
-        focusWindow,
-        handleDrop,
       }}
     >
       {children}

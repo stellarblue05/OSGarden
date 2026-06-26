@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import PopUp from "../Component/Pop-up";
-import { components, useLilum } from "../Systems/Lilum/Kernel";
 import FileViewer from "./FileViewer";
 
+import { components, useLilum } from "../Systems/Lilum/Kernel";
+import { useGlobal } from "../Global";
+
 const ThisPC = (props) => {
-  const { storage, theme, open, openWindow } = useLilum();
+  const { storage, theme } = useLilum();
+  const { getExtType, openWindow, open } = useGlobal();
 
   const [newDirName, setNewDirName] = useState("");
 
@@ -80,12 +83,19 @@ const ThisPC = (props) => {
       openFolder(name, item);
       return null;
     }
+    if (item.type === "app") {
+
+    }
+
+    let type = getExtType(item.ext, item.content)
+
 
     openWindow({
       id: `file-${name}`,
       title: name,
       component: "FileViewer",
       content: item.content,
+      type
     });
   }
 

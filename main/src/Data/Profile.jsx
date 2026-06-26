@@ -3,6 +3,8 @@ import { createContext, useContext, useState } from "react";
 const ProfileContext = createContext();
 
 export function ProfileProvider({ children }) {
+
+  //Users Profiles
   const [profiles, setProfiles] = useState({
     lilum: {
       pfp: "/pfp/C-1.png",
@@ -26,6 +28,53 @@ export function ProfileProvider({ children }) {
       }
     },
   });
+  
+  //Get file types
+  function getExtType(ext, content) {
+    let type;
+
+    switch (ext) {
+      case "txt":
+        type = "text";
+        break;
+      case "png":
+        type = "img";
+        break;
+      case "":
+      default:
+        type = content ? "data" : "empty";
+    }
+
+    return type;
+  }
+
+  function getFileType(ext, content) {
+  ext = String(ext || "").toLowerCase();
+
+  if (!content) return "empty";
+
+  switch (ext) {
+    case "":
+    case "txt":
+      if (/[^\x00-\x7f]/.test(content)) {
+        return "Unicode text, UTF-8 text";
+      }
+
+      return "ASCII text";
+
+    case "png":
+      return "PNG image data, 8-bit/color RGB";
+
+    case "jpg":
+    case "jpeg":
+      return "JPEG image data";
+
+    default:
+      return "data";
+  }
+  }
+
+  
 
   return (
     <ProfileContext.Provider value={{ profiles, setProfiles }}>
