@@ -333,7 +333,22 @@ export function runCommand({
       }
 
       return e || true;
+    } case "cat": {
+      if (!target) return "file: missing file name";
+
+
+      const item = dir.children?.[target];
+      if (!item) return `file: ${target}: not found`;
+
+      if (item.type === "folder" || item.type === "dir") {
+        return `${target}: is a directory`;
+      }
+
+
+      return item.content
+
     }
+
     default:
       return `${command}: command not found`;
   }
