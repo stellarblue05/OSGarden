@@ -7,7 +7,7 @@ export function ProfileProvider({ children }) {
   //Users Profiles
   const [profiles, setProfiles] = useState({
     lilum: {
-      pfp: "/pfp/C-1.png",
+      pfp: `${import.meta.env.BASE_URL}/pfp/C-1.png`,
       username: "Daisy1280",
       name: "Daisy",
       device: "Ampro Pad 12",
@@ -15,7 +15,7 @@ export function ProfileProvider({ children }) {
       bio: "Getting bored today.",
       location: "Earth, Virgo Supercluster",
       cn: {
-        pfp: "/pfp/C-1.png",
+        pfp: `${import.meta.env.BASE_URL}/pfp/C-1.png`,
         username: "Adarkmage",
         name: "notDaisy",
         bio: "I am fish ~>(  ')",

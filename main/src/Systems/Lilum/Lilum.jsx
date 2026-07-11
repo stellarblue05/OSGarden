@@ -160,14 +160,14 @@ const Lilum = () => {
                   className="h-13 w-13 rounded-xl opacity-[0.95] overflow-hidden transition-transform hover:scale-105 flex justify-center items-center"
                   onClick={() => openWindow(e)}
                 >
-                  {renderIcon(e)}
+                  {renderIcon(e)} 
                 </button>
               </div>
             ))}
           </div>
 
           <img
-            src="/Wallpapers/L-1.png"
+            src={`${import.meta.env.BASE_URL}/Wallpapers/L-1.png`}
             alt="wallpaper"
             className="absolute inset-0 -z-10 w-full h-full transition object-cover"
             style={{ filter: dark ? "brightness(75%)" : null }}

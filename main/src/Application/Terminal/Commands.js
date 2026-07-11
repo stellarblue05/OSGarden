@@ -218,6 +218,7 @@ export function runCommand({
       if (!target) return "rmdir: missing folder name";
 
 
+
       if (!dir.children?.[target]) return `rmdir: ${target}: not found`;
 
       if (dir.children[target].type !== "folder")
@@ -348,6 +349,7 @@ export function runCommand({
       return item.content
 
     }
+
 
     default:
       return `${command}: command not found`;

@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import Start from "./Start.jsx";
@@ -12,31 +12,33 @@ import { GlobalProvider } from "./Global.jsx";
 //Storage
 import { LilumProvider } from "./Systems/Lilum/Kernel.jsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <GlobalProvider>
-        <App />
-      </GlobalProvider>
-    ),
-    errorElement: <Error />,
-    children: [
-      {
-        index: true,
-        element: <Start />,
-      },
-      {
-        path: "Lilum",
-        element: (
-          <LilumProvider>
-            <Lilum />
-          </LilumProvider>
-        ),
-      },
-    ],
-  },
-]);
+const router = createHashRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <GlobalProvider>
+          <App />
+        </GlobalProvider>
+      ),
+      errorElement: <Error />,
+      children: [
+        {
+          index: true,
+          element: <Start />,
+        },
+        {
+          path: "Lilum",
+          element: (
+            <LilumProvider>
+              <Lilum />
+            </LilumProvider>
+          ),
+        },
+      ],
+    },
+  ],
+);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

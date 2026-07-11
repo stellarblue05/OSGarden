@@ -84,18 +84,19 @@ const ThisPC = (props) => {
       return null;
     }
     if (item.type === "app") {
+      
+
 
     }
 
-    let type = getExtType(item.ext, item.content)
-
+    let type = getExtType(item.ext, item.content);
 
     openWindow({
       id: `file-${name}`,
       title: name,
       component: "FileViewer",
       content: item.content,
-      type
+      type,
     });
   }
 
