@@ -24,11 +24,19 @@ export default function Comment({ c, Users, CNtheme, onError }) {
         />
 
         <div className="text-sm ml-1 mr-4">
-          <p className="opacity-95 text-[11.5px]">{cuser?.n} </p>
-          <p className={`${isLongText && !readMore ? "line-clamp-2": ""}`}>{c?.c}</p>
-         {isLongText && <button  onClick={() => setReadMore((prev) => !prev)}>
-           <p className="text-[12px] opacity-75 hover:opacity-90 hover:underline">{readMore ? "Show Less" : "Read More"}</p>
-          </button>}
+          <p className="opacity-85 text-[11.5px]">{cuser?.n} </p>
+          <p
+            className={`${isLongText && !readMore ? "line-clamp-2" : ""} mr-2 text-[13px] `}
+          >
+            {c?.c}
+          </p>
+          {isLongText && (
+            <button onClick={() => setReadMore((prev) => !prev)}>
+              <p className="text-[12px] opacity-75 hover:opacity-90 hover:underline">
+                {readMore ? "Show Less" : "Read More"}
+              </p>
+            </button>
+          )}
         </div>
 
         <div className="absolute right-2 flex flex-col center top-1">

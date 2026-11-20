@@ -20,12 +20,18 @@ const Lilum = () => {
     clockBar,
     setClockBar,
     profileBar,
-    setProfileBar
+    setProfileBar,
   } = useLilum();
 
   const {
-     getExtType, getFileType, openWindow, closeWindow,open, focusWindow, handleDrop 
-  } = useGlobal()
+    getExtType,
+    getFileType,
+    openWindow,
+    closeWindow,
+    open,
+    focusWindow,
+    handleDrop,
+  } = useGlobal();
 
   //Find apps in desktop storage
   const apps = Object.entries(
@@ -127,9 +133,7 @@ const Lilum = () => {
             const { key, ...item } = e;
 
             return (
-              <div
-                key={key || e.id}
-              >
+              <div key={key || e.id}>
                 <AppComponent
                   {...item}
                   onClose={() => closeWindow(e.id)}
@@ -160,7 +164,7 @@ const Lilum = () => {
                   className="h-13 w-13 rounded-xl opacity-[0.95] overflow-hidden transition-transform hover:scale-105 flex justify-center items-center"
                   onClick={() => openWindow(e)}
                 >
-                  {renderIcon(e)} 
+                  {renderIcon(e)}
                 </button>
               </div>
             ))}

@@ -34,7 +34,7 @@ export default function Self({
           <button
             onClick={onBack}
             style={{ color: CNtheme.text }}
-            className="m-1 hover:backdrop-brightness-50 flex center p-1 transition rounded-full"
+            className="btn-hover  m-1  flex center p-1 transition rounded-full"
           >
             <span className="material-symbols-outlined">
               arrow_back_ios_new
@@ -56,7 +56,16 @@ export default function Self({
 
           <p className="text-sm leading-0 opacity-45">@{user?.username}</p>
 
-          <button className={`h-8 w-max px-4 cursor-pointer border rounded-full absolute top-[4px] right-2 flex center hover:bg-[var(--joe)] transition-colors duration-300`} style={{borderColor: `color-mix(in srgb, ${CNtheme.text} 40%, transparent)`, "--joe": CNtheme.sec}} onClick={() => setEdit((prev) => !prev)} ><p className="inter font-bold text-sm">Edit Profile</p></button>
+          <button
+            className={`h-8 w-max px-4 cursor-pointer border rounded-full absolute top-[4px] right-2 flex center hover:bg-[var(--joe)] transition-colors duration-300`}
+            style={{
+              borderColor: `color-mix(in srgb, ${CNtheme.text} 40%, transparent)`,
+              "--joe": CNtheme.sec,
+            }}
+            onClick={() => setEdit((prev) => !prev)}
+          >
+            <p className="inter font-bold text-sm">Edit Profile</p>
+          </button>
         </div>
 
         <div className="m-1 mt-2">
@@ -98,14 +107,16 @@ export default function Self({
         <br />
         <p className="ml-1 font-[500] poppins text-sm rounded">Posts {">"}</p>
 
-
-
-
         <hr className="opacity-50" />
-         {edit && <SettSelf CNprofile={CNprofile} setCNprofile={setCNprofile} CNtheme={CNtheme} onBack={() => setEdit((prev) => !prev)}/>}
+        {edit && (
+          <SettSelf
+            CNprofile={CNprofile}
+            setCNprofile={setCNprofile}
+            CNtheme={CNtheme}
+            onBack={() => setEdit((prev) => !prev)}
+          />
+        )}
       </div>
-
-     
     </div>
   );
 }

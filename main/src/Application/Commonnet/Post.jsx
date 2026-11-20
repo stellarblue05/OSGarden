@@ -3,21 +3,21 @@ import Gallery from "./Gallery.jsx";
 import Comment from "./Comment.jsx";
 
 export default function Post({ post, Users, CNtheme, setPage, style }) {
-
-
-let randomNum = Math.floor(Math.random() * 1000000)
+  let randomNum = Math.floor(Math.random() * 1000000);
   const user = useMemo(() => {
-    return Users?.find((u) => u.id === post.uid) ?? {
-    "id": randomNum,
-    "n": `User${randomNum}`,
-    "un": `User${randomNum}`,
-    "bio": null,
-    "pfp": "https://picsum.photos/200?random=2",
-    "fer": 0,
-    "ing": 0,
-    "loc": "NewYork, USA"
-  }}, [Users, post.uid]);
- 
+    return (
+      Users?.find((u) => u.id === post.uid) ?? {
+        id: randomNum,
+        n: `User${randomNum}`,
+        un: `User${randomNum}`,
+        bio: null,
+        pfp: "https://picsum.photos/200?random=2",
+        fer: 0,
+        ing: 0,
+        loc: "NewYork, USA",
+      }
+    );
+  }, [Users, post.uid]);
 
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
@@ -34,9 +34,9 @@ let randomNum = Math.floor(Math.random() * 1000000)
 
   const profileClick = () => {
     if (user?.un) {
-      setPage({type: "profile", userId: user.id})
+      setPage({ type: "profile", userId: user.id });
     }
-  }
+  };
 
   return (
     <div
@@ -47,7 +47,7 @@ let randomNum = Math.floor(Math.random() * 1000000)
         backgroundColor: CNtheme.pri,
         boxShadow: `1px 1px 10px 1px ${CNtheme.shadow}`,
         border: `1px solid ${CNtheme.shadow}`,
-        ...style
+        ...style,
       }}
     >
       <div className="flex items-center">
@@ -58,9 +58,14 @@ let randomNum = Math.floor(Math.random() * 1000000)
           style={{ border: `1px solid ${CNtheme.text}` }}
         />
         <div className="relative">
-          <p className="text-sm hover:underline ">{user?.n || user?.un || `User${user?.id}`}</p>
+          <p className="text-sm text-hover">
+            {user?.n || user?.un || `User${user?.id}`}
+          </p>
           <p className="text-[10px] opacity-60">@{user?.un}</p>
-          <button className="inset-0 absolute cursor-pointer " onClick={() => profileClick()}></button>
+          <button
+            className="inset-0 absolute cursor-pointer "
+            onClick={() => profileClick()}
+          ></button>
         </div>
         <div className="pl-2">
           {user?.v ? (

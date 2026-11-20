@@ -132,7 +132,7 @@ def create_user():
 
     save_json(USERS, users_data)
 
-    print(f"✓ User created ({uid})")
+    print(f"User created ({uid})")
 
     print("Do you want to create a post for this account? (y/n)")
     sigma_skibidi = input(">")

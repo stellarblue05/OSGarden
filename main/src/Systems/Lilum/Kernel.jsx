@@ -109,10 +109,8 @@ export function LilumProvider({ children }) {
 
   //Pop-ups
 
-
   const [clockBar, setClockBar] = useState(false);
   const [profileBar, setProfileBar] = useState(false);
-  
 
   return (
     <LilumContext.Provider

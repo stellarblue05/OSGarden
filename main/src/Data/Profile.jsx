@@ -3,7 +3,6 @@ import { createContext, useContext, useState } from "react";
 const ProfileContext = createContext();
 
 export function ProfileProvider({ children }) {
-
   //Users Profiles
   const [profiles, setProfiles] = useState({
     lilum: {
@@ -24,57 +23,56 @@ export function ProfileProvider({ children }) {
         t: "2019-06-12T14:04:24",
         ty: "self",
         col: "#F7CAC9",
-        posts: []
-      }
+        posts: [],
+      },
     },
   });
-  
-  //Get file types
-  function getExtType(ext, content) {
-    let type;
 
-    switch (ext) {
-      case "txt":
-        type = "text";
-        break;
-      case "png":
-        type = "img";
-        break;
-      case "":
-      default:
-        type = content ? "data" : "empty";
-    }
+  //  Ctrl + /
+  // //Get file types
+  // function getExtType(ext, content) {
+  //   let type;
 
-    return type;
-  }
+  //   switch (ext) {
+  //     case "txt":
+  //       type = "text";
+  //       break;
+  //     case "png":
+  //       type = "img";
+  //       break;
+  //     case "":
+  //     default:
+  //       type = content ? "data" : "empty";
+  //   }
 
-  function getFileType(ext, content) {
-  ext = String(ext || "").toLowerCase();
+  //   return type;
+  // }
 
-  if (!content) return "empty";
+  // function getFileType(ext, content) {
+  // ext = String(ext || "").toLowerCase();
 
-  switch (ext) {
-    case "":
-    case "txt":
-      if (/[^\x00-\x7f]/.test(content)) {
-        return "Unicode text, UTF-8 text";
-      }
+  // if (!content) return "empty";
 
-      return "ASCII text";
+  // switch (ext) {
+  //   case "":
+  //   case "txt":
+  //     if (/[^\x00-\x7f]/.test(content)) {
+  //       return "Unicode text, UTF-8 text";
+  //     }
 
-    case "png":
-      return "PNG image data, 8-bit/color RGB";
+  //     return "ASCII text";
 
-    case "jpg":
-    case "jpeg":
-      return "JPEG image data";
+  //   case "png":
+  //     return "PNG image data, 8-bit/color RGB";
 
-    default:
-      return "data";
-  }
-  }
+  //   case "jpg":
+  //   case "jpeg":
+  //     return "JPEG image data";
 
-  
+  //   default:
+  //     return "data";
+  // }
+  //}
 
   return (
     <ProfileContext.Provider value={{ profiles, setProfiles }}>

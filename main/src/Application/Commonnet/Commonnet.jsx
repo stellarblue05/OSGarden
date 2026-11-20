@@ -8,31 +8,28 @@ import Posts from "../../Data/CommonnetData/Posts.json";
 
 import Feeds from "./Feeds";
 import Profile from "./Profile";
-import Self from "./Self.jsx"
+import Self from "./Self.jsx";
+import Create from "./Create.jsx";
 
 const Commonnet = (props) => {
   const { profiles, setProfiles } = useProfile();
-  
-    const profile = profiles?.lilum;
-    const CNprofile = profile?.cn;
 
-    function setCNprofile(e) {
-    setProfiles(prev => ({
+  const profile = profiles?.lilum;
+  const CNprofile = profile?.cn;
+
+  function setCNprofile(e) {
+    setProfiles((prev) => ({
       ...prev,
       lilum: {
         ...prev.lilum,
-      cn:
-        typeof e === "function"
-          ? e(prev.lilum.cn)
-          : e
-      }
-    }))};
-  
-  
+        cn: typeof e === "function" ? e(prev.lilum.cn) : e,
+      },
+    }));
+  }
+
   const { theme } = useLilumTheme();
 
   const [CNtheme, setCNtheme] = useState({});
-
 
   useEffect(() => {
     //this pallet made by chat-gpt will change soon
@@ -53,7 +50,7 @@ const Commonnet = (props) => {
       setCNtheme({
         bg: "#fffaec", // App background
         pri: "#FFFFFF", // Cards/posts
-        sec: "#F5F7FA", // Secondary surfaces
+        sec: "#eeccaa", // Secondary surfaces
         light: "#fcefdd", // Borders
         dark: "#D1D5DB", // Strong accents
         yellow: "#F4C24E", // Brand color
@@ -65,25 +62,53 @@ const Commonnet = (props) => {
     }
   }, [theme.dark]);
 
-  /*User ID placement
-  1. 1 = Admin 2=Company 3=Influenser 4=Meme 5=Adult 6=kids 7=Formal 8=Goverment 9=Avarage Joe
-  */
+  const [page, setPage] = useState({ type: "feed" });
 
- const [page, setPage] = useState({type: "feed"});
-
- function pages () {
-  if (page.type === "profile") {
-    return(<Profile CNtheme={CNtheme} Posts={Posts} userId={page.userId} onBack={() => setPage({type: "feed"})} Users={Users} />)
+  function pages() {
+    switch (page.type) {
+      case "profile":
+        return (
+          <Profile
+            CNtheme={CNtheme}
+            Posts={Posts}
+            userId={page.userId}
+            onBack={() => setPage({ type: "feed" })}
+            Users={Users}
+          />
+        );
+      case "self":
+        return (
+          <Self
+            CNtheme={CNtheme}
+            onBack={() => setPage({ type: "feed" })}
+            profile={profile}
+            setCNprofile={setCNprofile}
+            CNprofile={CNprofile}
+          />
+        );
+      case "create":
+        return (
+          <Create
+            CNtheme={CNtheme}
+            CNprofile={CNprofile}
+            setCNprofile={setCNprofile}
+            onBack={() => setPage({ type: "feed" })}
+          />
+        );
+      case "feed":
+      default:
+        return (
+          <Feeds
+            CNtheme={CNtheme}
+            setPage={setPage}
+            Users={Users}
+            Posts={Posts}
+            theme={theme}
+            CNprofile={CNprofile}
+          />
+        );
+    }
   }
-  if (page.type === "self") {
-    return(<Self CNtheme={CNtheme} onBack={() => setPage({type: "feed"})} profile={profile} setCNprofile={setCNprofile} CNprofile={CNprofile}/>)
-  }
-  else {
-    return(<Feeds CNtheme={CNtheme} setPage={setPage} Users={Users} Posts={Posts} theme={theme} CNprofile={CNprofile}/>)
-  }
- }
-
-
 
   return (
     <PopUp
@@ -103,6 +128,5 @@ const Commonnet = (props) => {
     </PopUp>
   );
 };
-
 
 export default Commonnet;

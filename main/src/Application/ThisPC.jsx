@@ -32,6 +32,12 @@ const ThisPC = (props) => {
     return item?.type === "folder" || item?.type === "dir";
   }
 
+  function isApp(item) {
+    const e = item?.type === "app" ? item.icon : false;
+    console.log(e);
+    return e;
+  }
+
   const pathText = pcPath.join("/");
   const currentDir = getDir(pcPath);
   const items = Object.entries(currentDir?.children || {});
@@ -84,9 +90,7 @@ const ThisPC = (props) => {
       return null;
     }
     if (item.type === "app") {
-      
-
-
+      return;
     }
 
     let type = getExtType(item.ext, item.content);
@@ -137,7 +141,11 @@ const ThisPC = (props) => {
             {items.map(([name, item]) => (
               <button key={name} onClick={() => openFile(name, item)}>
                 <span className="material-symbols-outlined">
-                  {isFolder(item) ? "folder" : "description"}
+                  {isFolder(item)
+                    ? "folder"
+                    : isApp(item)
+                      ? isApp(item)
+                      : "description"}
                 </span>
 
                 <p>{item.name || name}</p>

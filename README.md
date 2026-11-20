@@ -2,6 +2,8 @@
 
 > An elegant, minimal operating system simulation featuring a virtual social media platform (CommonNet).
 
+(My Friend Generate this Readme 4 me <3)
+
 ![OSGarden Preview](./Data/img/p-1.jpeg)
 
 ---
@@ -85,6 +87,7 @@ Whenever you or your team pushes a new commit to GitHub, your hosted website can
 We have already configured a GitHub Actions workflow inside this project (`.github/workflows/deploy.yml`) to automatically build and host the React/Vite app on GitHub Pages.
 
 #### Step 1: Push your code to GitHub (Using Git Bash)
+
 Open **Git Bash** in the root of your project directory and run:
 
 ```bash
@@ -109,6 +112,7 @@ git push -u origin main
 ```
 
 #### Step 2: Enable GitHub Pages in your repository settings
+
 1. Go to your repository page on **GitHub.com**.
 2. Click on **Settings** (the gear icon at the top).
 3. Scroll down the left sidebar and click on **Pages**.
@@ -129,8 +133,3 @@ If you prefer using Vercel, it connects directly to GitHub and requires no workf
 4. Click **Deploy**.
 
 Vercel will detect Vite, build it, and automatically redeploy the site every time a change is pushed to your `main` branch.
-
-
-
-
-67
