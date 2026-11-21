@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SettSelf from "./SettSelf";
+import Post from "./Post";
 
 export default function Self({
   setCNprofile,
@@ -7,8 +8,12 @@ export default function Self({
   profile,
   onBack,
   CNprofile,
+  Users,
+  Posts,
 }) {
   const user = CNprofile;
+
+  const UserPosts = user?.posts;
 
   useEffect(() => {
     const popupBody = document.querySelector(".lilum-scroll");
@@ -116,6 +121,24 @@ export default function Self({
             onBack={() => setEdit((prev) => !prev)}
           />
         )}
+      </div>
+      <hr className="opacity-50" />
+      <div className="mx-2 mb-2">
+        {UserPosts?.map((post) => (
+          <Post
+            key={post.id}
+            post={post}
+            Users={Users}
+            CNtheme={CNtheme}
+            CNprofile={CNprofile}
+            profile={profile}
+            style={{
+              width: "100%",
+              margin: "0",
+              marginTop: "12px",
+            }}
+          />
+        ))}
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const ThisPC = (props) => {
 
   function isApp(item) {
     const e = item?.type === "app" ? item.icon : false;
-    console.log(e);
+
     return e;
   }
 

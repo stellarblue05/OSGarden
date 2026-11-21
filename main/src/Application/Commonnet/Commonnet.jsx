@@ -74,6 +74,7 @@ const Commonnet = (props) => {
             userId={page.userId}
             onBack={() => setPage({ type: "feed" })}
             Users={Users}
+            setPage={setPage}
           />
         );
       case "self":
@@ -84,6 +85,8 @@ const Commonnet = (props) => {
             profile={profile}
             setCNprofile={setCNprofile}
             CNprofile={CNprofile}
+            Users={Users}
+            Posts={Posts}
           />
         );
       case "create":
@@ -102,6 +105,7 @@ const Commonnet = (props) => {
             CNtheme={CNtheme}
             setPage={setPage}
             Users={Users}
+            profile={profile}
             Posts={Posts}
             theme={theme}
             CNprofile={CNprofile}

@@ -12,8 +12,8 @@ export default function Create({ CNtheme, CNprofile, setCNprofile, onBack }) {
       posts: [
         ...prev.posts,
         {
-          id: 1,
-          uid: 101,
+          id: Math.round(Math.random() * 100000), //TEMP (Maybe forever)
+          uid: "user",
           c: postRef.current.value,
           m: [],
           l: 0,
@@ -21,7 +21,7 @@ export default function Create({ CNtheme, CNprofile, setCNprofile, onBack }) {
           s: 0,
           v: 0,
           tag: "",
-          t: "2026-06-01T12:00:00",
+          t: new Date("2026-06-01T12:00:00Z"),
         },
       ],
     }));

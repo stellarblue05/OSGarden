@@ -3,7 +3,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import Gallery from "./Gallery.jsx";
 import Post from "./Post.jsx";
 
-const Feeds = ({ CNtheme, setPage, Users, Posts, CNprofile }) => {
+const Feeds = ({ CNtheme, setPage, Users, Posts, CNprofile, profile }) => {
   const selfPost = CNprofile?.posts || [];
 
   const shuffled = useMemo(() => {
@@ -16,6 +16,8 @@ const Feeds = ({ CNtheme, setPage, Users, Posts, CNprofile }) => {
       popupBody.scrollTop = 0;
     }
   }, []);
+
+  const userPosts = shuffled.filter((e) => e?.uid === "user");
 
   return (
     <div className="w-full h-full">
@@ -66,6 +68,9 @@ const Feeds = ({ CNtheme, setPage, Users, Posts, CNprofile }) => {
             post={post}
             Users={Users}
             CNtheme={CNtheme}
+            CNprofile={CNprofile}
+            profile={profile}
+            shuffled={shuffled}
           />
         ))}
       </div>

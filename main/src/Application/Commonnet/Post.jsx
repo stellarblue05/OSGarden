@@ -2,14 +2,36 @@ import React, { useMemo, useState } from "react";
 import Gallery from "./Gallery.jsx";
 import Comment from "./Comment.jsx";
 
-export default function Post({ post, Users, CNtheme, setPage, style }) {
+export default function Post({
+  post,
+  Users,
+  CNtheme,
+  setPage,
+  style,
+  CNprofile,
+  profile,
+}) {
   let randomNum = Math.floor(Math.random() * 1000000);
+
   const user = useMemo(() => {
+    if (post.uid === "user") {
+      return {
+        id: "user",
+        n: CNprofile.name,
+        un: CNprofile.username,
+        bio: CNprofile.bio,
+        pfp: CNprofile.pfp,
+        fer: CNprofile.fer,
+        ing: CNprofile.ing,
+        loc: profile.location,
+      };
+    }
+
     return (
       Users?.find((u) => u.id === post.uid) ?? {
-        id: randomNum,
-        n: `User${randomNum}`,
-        un: `User${randomNum}`,
+        id: post.uid,
+        n: `User${post.uid}`,
+        un: `User${post.uid}`,
         bio: null,
         pfp: "https://picsum.photos/200?random=2",
         fer: 0,
@@ -17,7 +39,7 @@ export default function Post({ post, Users, CNtheme, setPage, style }) {
         loc: "NewYork, USA",
       }
     );
-  }, [Users, post.uid]);
+  }, [Users, post.uid, CNprofile, profile]);
 
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
@@ -134,14 +156,13 @@ export default function Post({ post, Users, CNtheme, setPage, style }) {
           </div>
         )}
         <p className="absolute bottom-1 right-7 flex center">
-          {post.v && (
-            <span
-              className="material-symbols-outlined mr-1 opacity-25"
-              style={{ color: CNtheme.text }}
-            >
-              visibility
-            </span>
-          )}
+          <span
+            className="material-symbols-outlined mr-1 opacity-25"
+            style={{ color: CNtheme.text }}
+          >
+            visibility
+          </span>
+
           {post.v || null}
         </p>
       </div>
