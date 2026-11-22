@@ -1,10 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
-
 const GlobalContext = createContext();
 
 export function GlobalProvider({ children }) {
-
   const [open, setOpen] = useState([]);
 
   //Look at files
@@ -76,7 +74,6 @@ export function GlobalProvider({ children }) {
     });
   }
 
-
   function closeWindow(id) {
     setOpen((prev) => prev.filter((e) => e.id !== id));
   }
@@ -88,24 +85,76 @@ export function GlobalProvider({ children }) {
     });
   }
 
- function handleDrop({ active, delta }) {
-  setOpen((prev) =>
-    prev.map((p) =>
-      String(p.id) === String(active.id)   // ← safe regardless of type
-        ? { ...p, x: p.x + delta.x, y: p.y + delta.y }
-        : p,
-    ),
-  );
-}
+  function handleDrop({ active, delta }) {
+    setOpen((prev) =>
+      prev.map((p) =>
+        String(p.id) === String(active.id) // ← safe regardless of type
+          ? { ...p, x: p.x + delta.x, y: p.y + delta.y }
+          : p,
+      ),
+    );
+  }
 
+  function createFile(name, content = "", storage, setStorage, currentPath) {
+    name = name.trim();
+    if (!name) return "missing file name";
 
-  return(
-  <GlobalContext.Provider value={{ getExtType, open, setOpen ,getFileType, openWindow, closeWindow, focusWindow, handleDrop }}>
+    const forbidden = ["<", ">", ":", '"', "/", "\\", "|", "?", "*"];
+
+    if (forbidden.some((char) => name.includes(char))) {
+      return "filename contains invalid characters";
+    }
+
+    const parts = name.split(".");
+    const ext = parts.length > 1 ? parts.pop().toLowerCase() : "";
+    const fileName = parts.length ? parts.join(".") : name;
+
+    const kind = getExtType(ext, content);
+
+    const newStorage = structuredClone(storage);
+    let newFile = newStorage;
+
+    for (const part of currentPath) {
+      if (!newFile.children?.[part]) {
+        return "Folder not found";
+      }
+      newFile = newFile.children[part];
+    }
+
+    if (newFile.children?.[name]) {
+      return `${name}: already exists`;
+    }
+
+    newFile.children[name] = {
+      ext,
+      name: `${fileName}${ext ? "." : ""}${ext}`,
+      type: "file",
+      kind,
+      content,
+    };
+
+    setStorage(newStorage);
+    return true;
+  }
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        getExtType,
+        open,
+        setOpen,
+        getFileType,
+        openWindow,
+        closeWindow,
+        focusWindow,
+        handleDrop,
+        createFile,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );
 }
-
 
 export function useGlobal() {
   return useContext(GlobalContext);
