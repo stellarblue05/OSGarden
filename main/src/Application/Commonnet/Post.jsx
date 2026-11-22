@@ -46,7 +46,7 @@ export default function Post({
 
   const [readMore, setReadMore] = useState(false);
 
-  let text_limit = 50;
+  let text_limit = 150;
   const isLongText = post?.c?.length > text_limit;
 
   function onError(e) {
@@ -104,7 +104,9 @@ export default function Post({
       <div className="flex flex-col mt-1 ml-1 items-start">
         <p
           style={{ textIndent: "2em" }}
-          className={`${isLongText && !readMore ? "line-clamp-2" : ""}`}
+          className={`break-words [overflow-wrap:anywhere] ${
+            isLongText && !readMore ? "line-clamp-2" : ""
+          }`}
         >
           {post.c}
         </p>

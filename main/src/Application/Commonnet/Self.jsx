@@ -65,7 +65,7 @@ export default function Self({
             className={`h-8 w-max px-4 cursor-pointer border rounded-full absolute top-[4px] right-2 flex center hover:bg-[var(--joe)] transition-colors duration-300`}
             style={{
               borderColor: `color-mix(in srgb, ${CNtheme.text} 40%, transparent)`,
-              "--joe": CNtheme.sec,
+              "--joe": CNtheme.yellow,
             }}
             onClick={() => setEdit((prev) => !prev)}
           >
@@ -111,8 +111,28 @@ export default function Self({
         </div>
         <br />
         <p className="ml-1 font-[500] poppins text-sm rounded">Posts {">"}</p>
+        <div className="w-full flex center">
+          <hr className="opacity-35 w-[95%] rounded" />
+        </div>
 
-        <hr className="opacity-50" />
+        <div className="mx-2 mb-2">
+          {UserPosts?.map((post) => (
+            <Post
+              key={post.id}
+              post={post}
+              Users={Users}
+              CNtheme={CNtheme}
+              CNprofile={CNprofile}
+              profile={profile}
+              style={{
+                width: "100%",
+                margin: "0",
+                marginTop: "12px",
+              }}
+            />
+          ))}
+        </div>
+
         {edit && (
           <SettSelf
             CNprofile={CNprofile}
@@ -121,24 +141,6 @@ export default function Self({
             onBack={() => setEdit((prev) => !prev)}
           />
         )}
-      </div>
-      <hr className="opacity-50" />
-      <div className="mx-2 mb-2">
-        {UserPosts?.map((post) => (
-          <Post
-            key={post.id}
-            post={post}
-            Users={Users}
-            CNtheme={CNtheme}
-            CNprofile={CNprofile}
-            profile={profile}
-            style={{
-              width: "100%",
-              margin: "0",
-              marginTop: "12px",
-            }}
-          />
-        ))}
       </div>
     </div>
   );

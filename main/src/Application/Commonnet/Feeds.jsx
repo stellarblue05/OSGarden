@@ -56,7 +56,12 @@ const Feeds = ({ CNtheme, setPage, Users, Posts, CNprofile, profile }) => {
           >
             Chat With Everyone
           </button>
-          <button className="absolute right-3 h-full flex center">
+          <button
+            onClick={() => {
+              setPage({ type: "create" });
+            }}
+            className="absolute right-3 h-full flex center cursor-pointer"
+          >
             <span className="material-symbols-outlined">add</span>
           </button>
         </div>

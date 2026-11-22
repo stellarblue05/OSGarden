@@ -14,7 +14,7 @@ export function ProfileProvider({ children }) {
       bio: "Getting bored today.",
       location: "Earth, Virgo Supercluster",
       cn: {
-        pfp: `${import.meta.env.BASE_URL}/pfp/C-1.png`,
+        pfp: `${import.meta.env.BASE_URL}/pfp/C-2.png`,
         username: "Adarkmage",
         name: "notDaisy",
         bio: "I am fish ~>(  ')",

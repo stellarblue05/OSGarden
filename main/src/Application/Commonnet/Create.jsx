@@ -7,6 +7,7 @@ export default function Create({ CNtheme, CNprofile, setCNprofile, onBack }) {
   const bio = user.bio;
 
   function onPost() {
+    if (!postRef.current.value) return;
     setCNprofile((prev) => ({
       ...prev,
       posts: [
@@ -43,29 +44,32 @@ export default function Create({ CNtheme, CNprofile, setCNprofile, onBack }) {
   return (
     <div className="inset-0 flex flex-col mr-2">
       <div
-        className="flex center rounded-sm "
+        className="flex center rounded-b-sm w-[102%]"
         style={{ backgroundColor: CNtheme.sec }}
       >
         <h3 className="font-bold poppins">Creating a wonderful post...</h3>
       </div>
+
       <div id="Header(profile)" className="m-1 flex w-full justify-between">
-        <div>
+        <div className="flex">
           <img
             src={user?.pfp || "https://picsum.photos/200"}
             alt={user?.un}
             className="h-12 w-12 rounded-full"
           />
-          <div className="ml-1 flex flex-col ">
+
+          <div className="ml-1 flex flex-col relative bottom-[5.5px]">
             <p className="font-semibold text-lg">{name}</p>
             <p className="font-thin relative bottom-2 opacity-60 text-sm">
               @{user.username}
             </p>
           </div>
         </div>
+
         <button
           onClick={onBack}
           style={{ color: CNtheme.text }}
-          className="btn-hover h-11 w-11 center flex transition rounded-full poppins font-bold font-lg"
+          className="btn-hover h-11 w-11  cursor-pointer center flex transition rounded-full poppins font-bold font-lg"
         >
           X
         </button>
@@ -78,6 +82,12 @@ export default function Create({ CNtheme, CNprofile, setCNprofile, onBack }) {
           className="w-[95%]  caret-[#F4C24E] border-0 outline-none text-xl min-h-20 resize-none overflow-hidden bg-transparent"
           rows={1}
           maxLength={450}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              onPost();
+            }
+          }}
         />
         <div className="opacity-20">Add Tag (WIP)</div>
         <div className="w-full h-[37px] ">

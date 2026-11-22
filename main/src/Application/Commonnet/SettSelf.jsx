@@ -20,7 +20,7 @@ export default function SettSelf({ CNprofile, setCNprofile, onBack, CNtheme }) {
 
   return (
     <div
-      className="inset-0 z-10 absolute flex flex-col poppins justify-between overflow-x-hidden"
+      className="inset-0 z-10 absolute flex flex-col poppins gap-5 overflow-x-hidden"
       style={{ backgroundColor: CNtheme.bg }}
     >
       <div
