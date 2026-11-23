@@ -27,7 +27,7 @@ const Notes = (props) => {
       title="Notes"
       {...props}
       handleStyle={{
-        backgroundColor: theme.bg || "White",
+        backgroundColor: theme.fbg || "White",
         color: theme.text || "Black",
       }}
     >
@@ -38,7 +38,7 @@ const Notes = (props) => {
         {/* Tool Bar */}
         <div
           className="w-full h-7 flex gap-2"
-          style={{ backgroundColor: theme.sec }}
+          style={{ backgroundColor: theme.fbg }}
         >
           <button
             className="mx-2 cursor-pointer poppins font-bold hover:underline"

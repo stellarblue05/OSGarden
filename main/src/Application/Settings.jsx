@@ -25,11 +25,38 @@ const Settings = (props) => {
       <div className="h-full p-1 poppins" style={{ color: theme.text }}>
         <div className="flex flex-col">
           <p className="poppins font-bold">Theme:</p>
-          <div className="flex gap-5">
-            <button onClick={() => setThemeStyle(1)}>1</button>
-            <button onClick={() => setThemeStyle(2)}>2</button>
-            <button onClick={() => setThemeStyle(3)}>3</button>
-            <button onClick={() => setThemeStyle(4)}>4</button>
+          <div className="grid grid-cols-2 w-full gap-2">
+            <button onClick={() => setThemeStyle(1)}>
+              <img
+                src={`${import.meta.env.BASE_URL}showcase/Lilium.png`}
+                alt=""
+                className="w-full h-full object-cover rounded "
+              />
+            </button>
+
+            <button onClick={() => setThemeStyle(2)}>
+              <img
+                src={`${import.meta.env.BASE_URL}showcase/blluePastel.png`}
+                alt=""
+                className="w-full h-full object-cover rounded"
+              />
+            </button>
+
+            <button onClick={() => setThemeStyle(3)}>
+              <img
+                src={`${import.meta.env.BASE_URL}showcase/catppushin.png`}
+                alt=""
+                className="w-full h-full object-cover rounded"
+              />
+            </button>
+
+            <button onClick={() => setThemeStyle(4)}>
+              <img
+                src={`${import.meta.env.BASE_URL}showcase/commonnet.png`}
+                alt=""
+                className="w-full h-full object-cover rounded"
+              />
+            </button>
           </div>
           <p>
             <b>Mode:</b>
