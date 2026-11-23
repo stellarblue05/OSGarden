@@ -118,8 +118,9 @@ export function LilumProvider({ children }) {
   const [themeStyle, setThemeStyle] = useState(1);
   const theme = lilumTheme(dark, themeStyle);
 
-  //Pop-ups
+  const [wallpaper, setWallpaper] = useState(`/Wallpapers/L-1.png`); //Init wallpaper
 
+  //Pop-ups
   const [clockBar, setClockBar] = useState(false);
   const [profileBar, setProfileBar] = useState(false);
 
@@ -137,6 +138,9 @@ export function LilumProvider({ children }) {
 
         themeStyle,
         setThemeStyle,
+
+        wallpaper,
+        setWallpaper,
 
         //Change theme func
         theme,

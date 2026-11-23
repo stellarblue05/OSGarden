@@ -137,6 +137,48 @@ export function GlobalProvider({ children }) {
     return true;
   }
 
+  //USER FILE SYSTEM (OUT OF WEB)
+  function handleUserImageUpload(e, callback) {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("Please select an image.");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      callback(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+
+    console.log("Name:", file.name);
+    console.log("Size:", file.size);
+    console.log("Type:", file.type);
+  }
+  /* 
+    <input
+    type="file"
+    accept="image/*"
+    onChange={(e) =>
+        handleImageUpload(e, (image) => {
+            setWallpaper(image);
+        })
+    }
+  />
+
+  <img
+    src={wallpaper}
+    alt="Wallpaper"
+    className="w-full h-full object-cover"
+  />
+  
+  */
+
   return (
     <GlobalContext.Provider
       value={{
@@ -149,6 +191,9 @@ export function GlobalProvider({ children }) {
         focusWindow,
         handleDrop,
         createFile,
+
+        //OUT ZONES
+        handleUserImageUpload,
       }}
     >
       {children}

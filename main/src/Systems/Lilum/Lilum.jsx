@@ -21,6 +21,7 @@ const Lilum = () => {
     setClockBar,
     profileBar,
     setProfileBar,
+    wallpaper,
   } = useLilum();
 
   const {
@@ -57,7 +58,7 @@ const Lilum = () => {
         return (
           <span
             className="material-symbols-outlined text-white text-4xl opacity-80"
-            style={{ fontSize: "48px" }}
+            style={{ fontSize: "48px", color: theme.text }}
           >
             {e.icon}
           </span>
@@ -145,7 +146,7 @@ const Lilum = () => {
 
           {/* Dock */}
           <div
-            className="flex gap-5 transition-all m-2 absolute bottom-0 right-[50%] translate-x-1/2 p-2 rounded-lg border border-[#828282aa] backdrop-blur-[2px] scale-90"
+            className="w-[100%] flex gap-5 h-15 transition-all m-2 absolute bottom-0 right-[50%] translate-x-1/2 p-2 rounded-lg border border-[#dbdbdb77] backdrop-blur-[2px] scale-90"
             style={{ backgroundColor: theme.bg }}
           >
             {apps.map((e) => (
@@ -155,14 +156,18 @@ const Lilum = () => {
                 style={{ color: "white" }}
               >
                 <p
-                  className="font-sans whitespace-nowrap leading-none mb-1 nunito transition hidden group-hover:block"
-                  style={{ textShadow: "1px 1px 1px #33333373" }}
+                  className="poppins text-lg font-bold absolute bottom-13 whitespace-nowrap leading-none  nunito transition hidden group-hover:block"
+                  style={{
+                    color: theme.text,
+                    textShadow: `1px 1px 3px ${theme.pri}99`,
+                  }}
                 >
                   {e.title}
                 </p>
                 <button
                   className="h-13 w-13 rounded-xl opacity-[0.95] overflow-hidden transition-transform hover:scale-105 flex justify-center items-center"
                   onClick={() => openWindow(e)}
+                  style={{ color: theme.text }}
                 >
                   {renderIcon(e)}
                 </button>
@@ -171,7 +176,12 @@ const Lilum = () => {
           </div>
 
           <img
-            src={`${import.meta.env.BASE_URL}/Wallpapers/L-1.png`}
+            src={
+              //Ye
+              wallpaper.startsWith("data:")
+                ? wallpaper
+                : `${import.meta.env.BASE_URL}${wallpaper}`
+            }
             alt="wallpaper"
             className="absolute inset-0 -z-10 w-full h-full transition object-cover"
             style={{ filter: dark ? "brightness(75%)" : null }}

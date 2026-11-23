@@ -4,7 +4,8 @@ import { useLilum } from "../../Systems/Lilum/Kernel";
 import { runCommand } from "./Commands";
 
 const Terminal = (props) => {
-  const { theme, storage, setStorage, currentPath, setCurrentPath } = useLilum();
+  const { theme, storage, setStorage, currentPath, setCurrentPath } =
+    useLilum();
 
   const [history, setHistory] = useState([
     {
@@ -22,18 +23,15 @@ const Terminal = (props) => {
   const currentPathText = "C:/" + currentPath.join("/");
   const bottomRef = useRef(null);
 
-  const [prompt, setPrompt] = useState('')
+  const [prompt, setPrompt] = useState("");
 
   const [terStyle, setTerStyle] = useState({
     backgroundColor: "",
-    color: theme.text
-  })
-
+    color: theme.text,
+  });
 
   useEffect(() => {
     inputRef.current?.focus();
-
-
   }, []);
 
   useEffect(() => {
@@ -44,27 +42,28 @@ const Terminal = (props) => {
     e.preventDefault();
 
     //Clear
-    if (cmdInput.trim().toLowerCase() === "clear" || cmdInput.trim().toLowerCase() === "clr"   ) {
+    if (
+      cmdInput.trim().toLowerCase() === "clear" ||
+      cmdInput.trim().toLowerCase() === "clr"
+    ) {
       setHistory([]);
       setCmdInput("");
       return;
     }
 
-
-
     const pathBeforeCmd = currentPathText;
 
     const output = runCommand({
       cmdInput,
-      storage,   
+      storage,
       setStorage,
       currentPath,
       setCurrentPath,
       setPrompt,
-      setTerStyle
+      setTerStyle,
     });
 
-        setHistory((prev) => [
+    setHistory((prev) => [
       ...prev,
       {
         prompt: promptText,
@@ -85,29 +84,30 @@ const Terminal = (props) => {
     setCmdInput("");
   }
 
-  const promptText = prompt || currentPathText
-
+  const promptText = prompt || currentPathText;
 
   return (
     <PopUp
       title="Terminal"
-      {...props}        
-      style={{ backgroundColor: theme.bg, backdropFilter: "blur(5px)"}}
+      {...props}
+      style={{ backgroundColor: theme.bg, backdropFilter: "blur(5px)" }}
       handleStyle={{ color: theme.text }}
       bodyStyle={`scroll-thin lilum-scroll  `}
       XStyle={{}} /* The X button style */
       fullStyle={{}} /* The full button style */
-      mainStyle={{...terStyle}}
+      mainStyle={{ ...terStyle }}
     >
       <div
-        className={`inset-0 relative jetbrains p-1 text-sm `} 
-        style={{ lineHeight: "1.2em" }}
+        className={`inset-0 relative jetbrains p-1 text-sm `}
+        style={{ lineHeight: "1.2em", color: theme.text }}
         onClick={() => inputRef.current?.focus()}
       >
         <form onSubmit={onSubmit}>
           {history.map((cmd, index) => (
-            
-            <p key={index} style={{marginBottom: cmd.type === "output" ? "7px" : "0" }}>
+            <p
+              key={index}
+              style={{ marginBottom: cmd.type === "output" ? "7px" : "0" }}
+            >
               {cmd.type === "input" ? `${cmd.prompt}> ${cmd.text}` : cmd.text}
             </p>
           ))}
