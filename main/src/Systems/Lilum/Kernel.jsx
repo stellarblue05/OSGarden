@@ -7,11 +7,13 @@ import ThisPC from "../../Application/ThisPC.jsx";
 import Commonnet from "../../Application/Commonnet/Commonnet.jsx";
 import Example from "../../Application/EXAMPLE.jsx";
 import Terminal from "../../Application/Terminal/Terminal.jsx";
+import Settings from "../../Application/Settings.jsx";
 
 import FileViewer from "../../Application/FileViewer.jsx";
 export const components = {
   ThisPC,
   Notes,
+  Settings,
   Commonnet,
   Example,
   Terminal,
@@ -42,6 +44,14 @@ const initialStorage = {
                   component: "ThisPC",
                   iconType: "gIcon",
                   icon: "laptop_mac",
+                  type: "app",
+                },
+                settings: {
+                  id: 6,
+                  title: "Settings",
+                  component: "Settings",
+                  iconType: "gIcon",
+                  icon: "settings",
                   type: "app",
                 },
                 notes: {
@@ -105,7 +115,8 @@ export function LilumProvider({ children }) {
 
   //Theme
   const [dark, setDark] = useState(true);
-  const theme = lilumTheme(dark);
+  const [themeStyle, setThemeStyle] = useState(1);
+  const theme = lilumTheme(dark, themeStyle);
 
   //Pop-ups
 
@@ -123,6 +134,11 @@ export function LilumProvider({ children }) {
         // Theme
         dark,
         setDark,
+
+        themeStyle,
+        setThemeStyle,
+
+        //Change theme func
         theme,
         // Windows
         clockBar,
