@@ -10,6 +10,7 @@ import Terminal from "../../Application/Terminal/Terminal.jsx";
 import Settings from "../../Application/Settings.jsx";
 
 import FileViewer from "../../Application/FileViewer.jsx";
+import Wallpaper from "./Wallpaper.js";
 export const components = {
   ThisPC,
   Notes,
@@ -117,9 +118,35 @@ export function LilumProvider({ children }) {
   const [dark, setDark] = useState(true);
   const [themeStyle, setThemeStyle] = useState(1);
   const theme = lilumTheme(dark, themeStyle);
+  const themeShowcase = [
+    {
+      id: 1,
+      name: "Lilium",
+      image: `${import.meta.env.BASE_URL}showcase/Lilium.png`,
+    },
+    {
+      id: 2,
+      name: "Blue Pastel",
+      image: `${import.meta.env.BASE_URL}showcase/blluePastel.png`,
+    },
+    {
+      id: 3,
+      name: "Catppuccin",
+      image: `${import.meta.env.BASE_URL}showcase/catppushin.png`,
+    },
+    {
+      id: 4,
+      name: "Commonnet",
+      image: `${import.meta.env.BASE_URL}showcase/commonnet.png`,
+    },
+  ];
 
-  const [wallpaper, setWallpaper] = useState(`/Wallpapers/L-1.png`); //Init wallpaper
+  const [wallpaperId, setWallpaper] = useState(1);
 
+  const wallpaper =
+    typeof wallpaperId === "object" ? wallpaperId : Wallpaper(wallpaperId);
+
+  const wallpaperList = Wallpaper(null, false, true);
   //Pop-ups
   const [clockBar, setClockBar] = useState(false);
   const [profileBar, setProfileBar] = useState(false);
@@ -139,7 +166,12 @@ export function LilumProvider({ children }) {
         themeStyle,
         setThemeStyle,
 
+        themeShowcase,
+
         wallpaper,
+        wallpaperList,
+
+        wallpaperId,
         setWallpaper,
 
         //Change theme func

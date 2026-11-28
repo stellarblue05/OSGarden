@@ -99,7 +99,14 @@ body {
 }
 
 .lilum-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #88888874 transparent;
+
   &::-webkit-scrollbar-thumb {
+    background: #88888874;
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
     background: #88888874;
     border-radius: 999px;
   }
@@ -154,6 +161,6 @@ body {
 }
 
 .blur {
-  backdrop-filter: blur(5px)  saturate(180%)  brightness(110%);
-  -webkit-backdrop-filter: blur(5px) saturate(180%)  brightness(110%);
+  backdrop-filter: blur(5px) saturate(180%) brightness(110%);
+  -webkit-backdrop-filter: blur(5px) saturate(180%) brightness(110%);
 }

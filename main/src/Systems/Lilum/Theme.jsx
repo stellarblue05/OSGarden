@@ -8,6 +8,7 @@ export const useLilumTheme = () => {
 export default function lilumTheme(dark, themeStyle) {
   const theme = {
     1: {
+      id: 1,
       dark: {
         bg: "#2A2438CC",
         fbg: "#2A2438",
@@ -16,6 +17,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#23283A",
         text: "#E8EAF2",
         hover: "rgba(255,255,255,0.1)",
+        color: "#B78AE0",
         dark: true,
       },
       light: {
@@ -26,6 +28,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#FFFFFF",
         text: "#2A2D3E",
         hover: "rgba(0,0,0,0.1)",
+        color: "#B78AE0",
         dark: false,
       },
     },
@@ -38,6 +41,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#243B53",
         text: "#EAF4FF",
         hover: "rgba(255,255,255,0.1)",
+        color: "#55BDEB",
         dark: true,
       },
       light: {
@@ -48,6 +52,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#FFFFFF",
         text: "#29445C",
         hover: "rgba(0,0,0,0.1)",
+        color: "#55BDEB",
         dark: false,
       },
     },
@@ -60,6 +65,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#181825",
         text: "#CDD6F4",
         hover: "rgba(255,255,255,0.1)",
+        color: "#CBA6F7",
         dark: true,
       },
       light: {
@@ -70,6 +76,7 @@ export default function lilumTheme(dark, themeStyle) {
         panel: "#FFFFFF",
         text: "#22232c",
         hover: "rgba(0,0,0,0.1)",
+        color: "#CBA6F7",
         dark: false,
       },
     },
@@ -83,6 +90,7 @@ export default function lilumTheme(dark, themeStyle) {
         text: "#F4C24E",
         hover: "rgba(249,250,251,0.1)",
         light: "#4B5563",
+        color: "#F4C24E",
         dark: true,
       },
       light: {
@@ -94,6 +102,7 @@ export default function lilumTheme(dark, themeStyle) {
         text: "#374151",
         hover: "rgba(55,65,81,0.1)",
         light: "#fcefdd",
+        color: "#F4C24E",
         dark: false,
       },
     },

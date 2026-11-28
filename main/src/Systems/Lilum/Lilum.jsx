@@ -70,7 +70,7 @@ const Lilum = () => {
         return null;
     }
   }
-
+  console.log("Wallpaper:", wallpaper);
   //import AM,PM clock
   const { hour, min, ampm } = useClock(12);
 
@@ -178,9 +178,9 @@ const Lilum = () => {
           <img
             src={
               //Ye
-              wallpaper.startsWith("data:")
-                ? wallpaper
-                : `${import.meta.env.BASE_URL}${wallpaper}`
+              wallpaper.image.startsWith("data:")
+                ? wallpaper.image
+                : `${import.meta.env.BASE_URL}${wallpaper.image}`
             }
             alt="wallpaper"
             className="absolute inset-0 -z-10 w-full h-full transition object-cover"
