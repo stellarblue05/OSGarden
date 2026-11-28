@@ -184,7 +184,9 @@ const Lilum = () => {
             }
             alt="wallpaper"
             className="absolute inset-0 -z-10 w-full h-full transition object-cover"
-            style={{ filter: dark ? "brightness(75%)" : null }}
+            style={{
+              filter: dark ? "brightness(75%) saturate(107%)" : null,
+            }}
           />
           <div
             className="absolute inset-0 -z-99 w-full h-full"
